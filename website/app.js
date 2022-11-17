@@ -10,6 +10,10 @@ const iconOutput = document.querySelector("#icon");
 const contentOutput = document.querySelector("#content");
 const entryHolder = document.querySelector("#entryHolder");
 const errorOutput = document.querySelector("#err"); 
+const inputArea = document.querySelector("#input-area");
+const outputArea = document.querySelector("#output-area");
+const arrow = document.querySelector("#arrow")
+
 
 // Create a new date instance dynamically with JS
 const d = new Date();
@@ -28,11 +32,20 @@ function handleAPI() {
     //open-weather API info
     const key = "1397df6969c093d63159553d0140d888";
     const URL = `https://api.openweathermap.org/data/2.5/weather?zip=${ZIPCodeInput.value}&appid=${key}`;
-    fetchAPI(URL)
-    .then((data) => consumeDataFromAPI(data))
-    .then((data) => postToServer("/post",data))
-    .then(() => getFromServer("/get"))
-    .then((data) => putDataInUI(data));
+    //validate zip code input is not empty
+    if(ZIPCodeInput.value){
+        //if valid change border color back to default
+        ZIPCodeInput.style.cssText = "border-color:var(quinary-color)";
+        fetchAPI(URL)
+        .then((data) => consumeDataFromAPI(data))
+        .then((data) => postToServer("/post",data))
+        .then(() => getFromServer("/get"))
+        .then((data) => putDataInUI(data));
+    }else{
+        //if not valid change border color to red and chnage placeholder
+        ZIPCodeInput.style.cssText = "border-color:red";
+        ZIPCodeInput.placeholder = "required input *";
+    }
 }
 
 //fetch open-weather api and return the resolved data
@@ -87,14 +100,17 @@ async function getFromServer(url = ""){
 async function putDataInUI(data){
     const result = await data;
     const iconURL = `http://openweathermap.org/img/wn/${await result.icon}.png`;
+    //hide input area and show output area
+    inputArea.style.display = "none";
+    outputArea.classList.add("active");
     //check if the response is valid data
     if(result.date && result.temp){
         //hide error field & show the entryholder fields container
-        entryHolder.style.display = "block";
         errorOutput.style.display = "none";
+        entryHolder.style.display = "flex";
         dateOutput.textContent = await result.date;
         countryOutput.textContent = await result.country;
-        tempOutput.textContent = await result.temp;
+        tempOutput.textContent = Math.round((await result.temp - 32) * 5/9);
         weatherOutput.textContent = await result.weather;
         iconOutput.src = iconURL;
         contentOutput.textContent = await result.feelings || "what do you feel today?!!!";
@@ -102,6 +118,35 @@ async function putDataInUI(data){
         //show error field & hide the entryholder fields container
         entryHolder.style.display = "none";
         errorOutput.style.display = "block";
-        errorOutput.innerHTML = result.error;
+        errorOutput.textContent = result.error;
+        reloadApp();
     }
 }
+
+/*UI related logic*/
+
+//handle clicking on the arrow to go back one step
+arrow.addEventListener("click" , () => {
+    inputArea.style.display = "flex";
+    outputArea.classList.remove("active");
+})
+
+//reload app incase the request was an error message
+function reloadApp(){
+    setInterval(() => {
+        errorOutput.textContent += ".";
+    },200)
+
+    setTimeout(() => {
+        window.location.reload();
+    },1000)
+}
+
+//clean all the fields after reloading
+function emptyFields(){
+    ZIPCodeInput.value = "";
+    feelingsTextArea.value = "";
+}
+emptyFields();
+
+
