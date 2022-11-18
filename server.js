@@ -21,23 +21,23 @@ app.use(bodyParser.json());
 // Cors for cross origin allowance
 app.use(cors());
 // Initialize the main project folder
-app.use(express.static('website'));
+app.use(express.static("website"));
 
 /*Setup Server*/
 
 //post data to  local server
-app.post("/post" , async (req , res) => {
-    const bodyData = await req.body;
-    projectData = bodyData;
-    res.status(200).send(projectData);
-})
+app.post("/post", async (req, res) => {
+  const bodyData = await req.body;
+  projectData = bodyData;
+  res.status(200).send(projectData);
+});
 
 //get data from  local server
-app.get("/getAll" , async (req,res) => {
-    res.send(projectData);
-})
+app.get("/getAll", async (req, res) => {
+  res.send(projectData);
+});
 
-//run server 
-app.listen(port , () => {
-    console.log("server runs on port number" + port);
-})
+//run server
+app.listen(port, () => {
+  console.log("server runs on port number" + port);
+});
