@@ -114,7 +114,7 @@ async function putDataInUI(data){
         tempOutput.textContent = Math.round((await result.temp - 32) * 5/9);
         weatherOutput.textContent = await result.weather;
         iconOutput.src = iconURL;
-        contentOutput.textContent = await result.feelings || "what do you feel today?!!!";
+        contentOutput.textContent = await result.feelings || "please, tell us what do you feel?!!";
     }else{
         //show error field & hide the entryholder fields container
         entryHolder.style.display = "none";
