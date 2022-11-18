@@ -33,7 +33,7 @@ app.post("/post" , async (req , res) => {
 })
 
 //get data from  local server
-app.get("/get" , async (req , res) => {
+app.get("/getAll" , async (req,res) => {
     res.send(projectData);
 })
 

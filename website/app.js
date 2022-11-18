@@ -39,7 +39,7 @@ function handleAPI() {
         fetchAPI(URL)
         .then((data) => consumeDataFromAPI(data))
         .then((data) => postToServer("/post",data))
-        .then(() => getFromServer("/get"))
+        .then(() => getFromServer("/getAll"))
         .then((data) => putDataInUI(data));
     }else{
         //if not valid change border color to red and chnage placeholder
