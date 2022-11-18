@@ -52,6 +52,7 @@ main.app{
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s ease;
+    display: none;
 }
 
 .app-header .arrow:hover{
@@ -113,10 +114,6 @@ button.submit-btn:hover{
     display: none;
 }
 
-section.output.active{
-    display: flex;
-}
-
 .output .entry-holder{
     width: 90%;
     padding: 10px;
@@ -173,4 +170,46 @@ div.error-msg{
     padding: 20px;
     color: var(--quaternary-color);
     font-size: 2rem;
+}
+
+/* responsive design  */
+@media (max-width:760px){
+    main.app{
+        max-width: 100%;
+        width: 80%;
+    }
+
+    .app-header h2.headline{
+        font-size: 1rem;
+    }
+
+    .app-header .arrow{
+        font-size: 1.5rem;
+    }
+
+    .output-footer{
+        flex-direction: column;
+    }
+
+    .output-footer > div{
+        width: 100%;
+    }
+
+    .output-footer div:first-child{
+        border:none;
+    }
+
+    .output-footer div:nth-child(2){
+        position: relative;
+    }
+    .output-footer div:nth-child(2)::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translatex(-50%);
+        width: 50%;
+        height: 1px;
+        background-color: var(--quinary-color);
+    }
 }

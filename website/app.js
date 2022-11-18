@@ -52,6 +52,7 @@ function handleAPI() {
 async function fetchAPI(url){
     const fetchAPI = await fetch(url);
     const resolvedData = await fetchAPI.json();
+    console.log(resolvedData);
     return resolvedData;
 }
 
@@ -102,7 +103,7 @@ async function putDataInUI(data){
     const iconURL = `http://openweathermap.org/img/wn/${await result.icon}.png`;
     //hide input area and show output area
     inputArea.style.display = "none";
-    outputArea.classList.add("active");
+    outputArea.style.display = "flex";
     //check if the response is valid data
     if(result.date && result.temp){
         //hide error field & show the entryholder fields container
@@ -121,14 +122,16 @@ async function putDataInUI(data){
         errorOutput.textContent = result.error;
         reloadApp();
     }
+    arrow.style.display = "flex";
 }
 
 /*UI related logic*/
 
-//handle clicking on the arrow to go back one step
+//handle clicking on the arrow to go back one step and hide the arrow
 arrow.addEventListener("click" , () => {
     inputArea.style.display = "flex";
-    outputArea.classList.remove("active");
+    outputArea.style.display = "none";
+    arrow.style.display = "none";
 })
 
 //reload app incase the request was an error message
