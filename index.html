@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Weather Journal</title>
+    <!-- style sheets  -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app" id="app">
+      <!-- start header  -->
+      <header class="app-header">
+        <span class="arrow" id="arrow">&larr;</span>
+        <h2 class="headline">Weather Journal App</h2>
+      </header>
+      <!-- end header  -->
+
+      <!-- start input area  -->
+      <section class="input" id="input-area">
+        <div class="holder zip">
+          <input type="text" id="zip" placeholder="enter zip code here" />
+        </div>
+        <div class="holder feel">
+          <textarea
+            class="myInput"
+            id="feelings"
+            placeholder="Enter your feelings here"
+          ></textarea>
+        </div>
+        <button class="submit-btn" id="generate" type="submit">Generate</button>
+      </section>
+      <!-- end input area  -->
+
+      <!-- start output area  -->
+      <section class="output" id="output-area">
+        <div class="entry-holder" id="entryHolder">
+          <div class="output-header">
+            <img id="icon" src="http://openweathermap.org/img/wn/04d.png" alt="" />
+          </div>
+          <div class="output-body">
+            <h2><span id="temp"></span><sup>o</sup>c</h2>
+            <p id="weather"></p>
+            <p id="country"></p>
+          </div>
+          <div class="output-footer">
+            <div id="date"></div>
+            <div id="content"></div>
+          </div>
+        </div>
+        <div class="error-msg" id="err"></div>
+      </section>
+      <!-- end output area  -->
+    </main>
+    <script src="app.js" type="text/javascript"></script>
+  </body>
+</html>
