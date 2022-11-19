@@ -122,8 +122,10 @@ async function putDataInUI(data) {
     //hide error field & show the entryholder fields container
     errorOutput.style.display = "none";
     entryHolder.style.display = "flex";
+    //update UI elements
     dateOutput.textContent = await result.date;
     countryOutput.textContent = `${await result.country},${await result.region}`;
+    //convert from kelvin to celsius
     tempOutput.textContent = Math.round(await result.temp - 273.15);
     weatherOutput.textContent = await result.weather;
     iconOutput.src = iconURL;
@@ -133,6 +135,7 @@ async function putDataInUI(data) {
     //show error field & hide the entryholder fields container
     entryHolder.style.display = "none";
     errorOutput.style.display = "block";
+    
     errorOutput.textContent = result.error;
     reloadApp();
   }
