@@ -124,11 +124,11 @@ async function putDataInUI(data) {
     entryHolder.style.display = "flex";
     dateOutput.textContent = await result.date;
     countryOutput.textContent = `${await result.country},${await result.region}`;
-    tempOutput.textContent = Math.round((((await result.temp) - 32) * 5) / 9);
+    tempOutput.textContent = Math.round(await result.temp - 273.15);
     weatherOutput.textContent = await result.weather;
     iconOutput.src = iconURL;
     contentOutput.textContent =
-      (await result.feelings) || "please, tell us what do you feel?!!";
+      (await result.feelings) || "what do you feel?!!";
   } else {
     //show error field & hide the entryholder fields container
     entryHolder.style.display = "none";
