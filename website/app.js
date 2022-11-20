@@ -33,6 +33,9 @@ const months = [
 const newDate =
   months[d.getMonth()] + "." + d.getDate() + "." + d.getFullYear();
 
+//open weather API related info
+const apiKey = "&appid=1397df6969c093d63159553d0140d888&units=metric";
+
 /*when clicking on the generate button chain of async promises will be executed consequently*/
 //fetching remote api and get resolved data
 //consuming returned data from the previous promise and assign them to an object
@@ -42,8 +45,7 @@ const newDate =
 generateBtn.addEventListener("click", handleAPI);
 function handleAPI() {
   //open-weather API info
-  const key = "1397df6969c093d63159553d0140d888";
-  const URL = `https://api.openweathermap.org/data/2.5/weather?zip=${ZIPCodeInput.value}&appid=${key}`;
+  const URL = `https://api.openweathermap.org/data/2.5/weather?zip=${ZIPCodeInput.value}${apiKey}`;
   //validate zip code input is not empty
   if (ZIPCodeInput.value) {
     //if valid change border color back to default
@@ -126,7 +128,7 @@ async function putDataInUI(data) {
     dateOutput.textContent = await result.date;
     countryOutput.textContent = `${await result.country},${await result.region}`;
     //convert from kelvin to celsius
-    tempOutput.textContent = Math.round(await result.temp - 273.15);
+    tempOutput.textContent = Math.round(await result.temp);
     weatherOutput.textContent = await result.weather;
     iconOutput.src = iconURL;
     contentOutput.textContent =
